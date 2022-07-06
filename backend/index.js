@@ -13,27 +13,27 @@ app.get("/", (req, res) => {
     res.send({ message: "Connected to Backend server!" });
     });
 
-app.post("/add/item", addItem)
+app.post("/add/item", addItem);
 
 function addItem (request, response) {
-    let id = request.body.jsonObject.id
-    let task = request.body.jsonObject.task
-    let curDate = request.body.jsonObject.currentDate
-    let dueDate = request.body.jsonObject.dueDate
-    var newTask = {
-      ID: id,
-      Task: task,
-      Current_date: curDate,
-      Due_date: dueDate
-    }
-    const jsonString = JSON.stringify(newTask)
-    
-    var data = fs.readFileSync('database.json');
-    var json = JSON.parse(data);
-    json.push(newTask);
-    fs.writeFile("database.json", JSON.stringify(json), function(err, result) {
-      if (err) { console.log('error', err) }
-      else { console.log('Successfully wrote to file') }
-    });
-    response.send(200);
-    }
+  let id = request.body.jsonObject.id
+  let task = request.body.jsonObject.task
+  let curDate = request.body.jsonObject.currentDate
+  let dueDate = request.body.jsonObject.dueDate
+  var newTask = {
+    ID: id,
+    Task: task,
+    Current_date: curDate,
+    Due_date: dueDate
+  }
+  const jsonString = JSON.stringify(newTask)
+  
+  var data = fs.readFileSync('database.json');
+  var json = JSON.parse(data);
+  json.push(newTask);
+  fs.writeFile("database.json", JSON.stringify(json), function(err, result) {
+    if (err) { console.log('error', err) }
+    else { console.log('Successfully wrote to file') }
+  });
+  response.send(200)
+}
